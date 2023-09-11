@@ -1,8 +1,8 @@
-WordPress WooCatSlider Plugin
+# WordPress WooCatSlider Plugin
 
 The WordPress WooCatSlider Plugin is a simple and effective tool that enables you to create product item sliders easily within your WordPress website. With this plugin, you can showcase products from specific categories in a slider by simply using a shortcode.
 
-Installation
+## Installation
 
 Download the latest release of the plugin from the GitHub releases page.
 Upload the downloaded ZIP file to your WordPress site by navigating to Plugins > Add New in your WordPress dashboard.
@@ -12,18 +12,20 @@ Usage
 
 To create a product item slider for a specific category, use the following shortcode:
 
-csharp
-Copy code
+```csharp
 [woocatslider category="your-category-slug"]
+```
+
 Replace "your-category-slug" with the actual slug of the category you want to display.
 
 Example:
 To display a slider of products from the "Clothing" category, use:
 
-csharp
-Copy code
+```csharp
 [woocatslider category="clothing"]
-Features
+```
+
+## Features
 
 Easy-to-Use: Create product item sliders with a single shortcode.
 Category Selection: Display products from specific categories.
@@ -32,11 +34,11 @@ Support
 
 If you encounter any issues or have questions regarding this plugin, please feel free to open an issue on the GitHub repository. We'll do our best to assist you.
 
-Contributing
+## Contributing
 
 Contributions are welcome! If you'd like to enhance the plugin or fix issues, please fork this repository, make your changes, and submit a pull request.
 
-License
+## License
 
 This WordPress WooCatSlider Plugin is released under the MIT License.
 
