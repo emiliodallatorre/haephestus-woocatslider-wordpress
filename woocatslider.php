@@ -14,6 +14,8 @@
  * category.
  */
 
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
 
 function enqueue_my_style()
 {
