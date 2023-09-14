@@ -14,7 +14,7 @@
  * category.
  */
 
-defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+defined('ABSPATH') or die('No script kiddies please!');
 
 
 function enqueue_my_style()
@@ -52,6 +52,7 @@ function woocatslider_shortcode($atts)
     );
 
     $loop = new WP_Query($args);
+    $category = $atts['category'];
 
 
     if ($loop->have_posts()) {
@@ -62,7 +63,7 @@ function woocatslider_shortcode($atts)
 
         while ($loop->have_posts()) : $loop->the_post();
             global $product;
-            $output .= '<div class="woocatslider-item slide">';
+            $output .= sprintf('<div class="woocatslider-item slide category-%s">', $category);
             $output .= '<a href="' . get_permalink() . '">';
             $output .= get_the_post_thumbnail($loop->post->ID, 'shop_catalog');
             $output .= '<h3>' . get_the_title() . '</h3>';
@@ -72,8 +73,8 @@ function woocatslider_shortcode($atts)
             $output .= '</div>';
         endwhile;
         $output .= '        
-            <button class="prev" onclick="changeSlide(-1)">❮</button>
-            <button class="next" onclick="changeSlide(1)">❯</button>
+            <button class="prev" onclick=\'changeSlide(-1, "' . trim($category) . '" )\'>❮</button>
+            <button class="next" onclick=\'changeSlide(1, "' . trim($category) . '" )\'>❯</button>
         </div>';
     } else {
         $output = __('No products found');

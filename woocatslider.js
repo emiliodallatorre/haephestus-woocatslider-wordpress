@@ -1,21 +1,35 @@
-let slideIndex = 0;
+let slideByCategoryIndex = {}
 
-function changeSlide(n) {
-    slideIndex += n;
-    showSlides();
+function changeSlide(n, category) {
+    if (!slideByCategoryIndex[category]) {
+        slideByCategoryIndex[category] = 0;
+    }
+
+    slideByCategoryIndex[category] += n;
+    showSlides(category);
 }
 
-function showSlides() {
-    const slides = document.querySelectorAll(".slide");
+function showSlides(category) {
+    if (!slideByCategoryIndex[category]) {
+        slideByCategoryIndex[category] = 0;
+    }
 
-    if (slideIndex < 0) {
-        slideIndex = slides.length - 1;
-    } else if (slideIndex >= slides.length) {
-        slideIndex = 0;
+    let slides;
+    if (category != null) {
+        slides = document.querySelectorAll(".slide.category-" + category);
+    } else {
+        slides = document.querySelectorAll(".slide");
+    }
+
+
+    if (slideByCategoryIndex[category] < 0) {
+        slideByCategoryIndex[category] = slides.length - 1;
+    } else if (slideByCategoryIndex[category] >= slides.length) {
+        slideByCategoryIndex[category] = 0;
     }
 
     for (let i = 0; i < slides.length; i++) {
-        slides[i].style.transform = `translateX(-${slideIndex * 100 - 12.5 - 5}%)`;
+        slides[i].style.transform = `translateX(-${slideByCategoryIndex[category] * 100 - 12.5 - 5}%)`;
     }
 }
 
