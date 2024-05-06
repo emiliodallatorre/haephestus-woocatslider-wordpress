@@ -4,6 +4,11 @@
     overflow: hidden;
     position: relative;
     max-width: 400px;
+    margin-bottom: 8px;
+}
+
+.category-slider-container {
+    margin-bottom: 64px;
 }
 
 /* Styles for individual slides */
@@ -37,4 +42,8 @@
 
 .next {
     right: 0;
+}
+
+.slide h3 {
+    font-size: 16px;
 }

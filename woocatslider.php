@@ -47,8 +47,12 @@ function woocatslider_shortcode($atts)
 
     $args = array(
         'post_type' => 'product',
-        'posts_per_page' => 10,
+        'posts_per_page' => 18,
         'product_cat' => $atts['category'],
+
+        'orderby' => 'meta_value_num',
+        'order' => 'DESC',
+        'meta_key' => 'total_sales',
     );
 
     $loop = new WP_Query($args);
@@ -58,8 +62,9 @@ function woocatslider_shortcode($atts)
     if ($loop->have_posts()) {
         $output =
             '
-        <div class="slideshow-container">
-        ';
+        <div class="category-slider-container show-only-mobile">
+            <div class="slideshow-container">
+            ';
 
         while ($loop->have_posts()) : $loop->the_post();
             global $product;
@@ -73,9 +78,14 @@ function woocatslider_shortcode($atts)
             $output .= '</div>';
         endwhile;
         $output .= '        
-            <button class="prev" onclick=\'changeSlide(-1, "' . trim($category) . '" )\'>❮</button>
-            <button class="next" onclick=\'changeSlide(1, "' . trim($category) . '" )\'>❯</button>
-        </div>';
+                <button class="prev" onclick=\'changeSlide(-1, "' . trim($category) . '" )\'>❮</button>
+                <button class="next" onclick=\'changeSlide(1, "' . trim($category) . '" )\'>❯</button>
+            </div>';
+
+        // Add see more button to go to the category
+        $output .= '<a href="' . get_term_link($category, 'product_cat') . '" class="button">' . __('Vedi altro') . '</a>';
+
+        $output .= '</div>';
     } else {
         $output = __('No products found');
     }
