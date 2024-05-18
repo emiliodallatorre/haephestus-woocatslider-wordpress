@@ -48,12 +48,20 @@ function woocatslider_shortcode($atts)
     $args = array(
         'post_type' => 'product',
         'posts_per_page' => 18,
-        'product_cat' => $atts['category'],
 
         'orderby' => 'meta_value_num',
         'order' => 'DESC',
         'meta_key' => 'total_sales',
     );
+
+    $for_category = false;
+    if ($atts['category'] != null) {
+        $args['product_cat'] = $atts['category'];
+
+        $for_category = true;
+    } else {
+        $args['orderby'] = 'date';
+    }
 
     $loop = new WP_Query($args);
     $category = $atts['category'];
@@ -83,12 +91,15 @@ function woocatslider_shortcode($atts)
             </div>';
 
         // Add see more button to go to the category
-        $output .= '<a href="' . get_term_link($category, 'product_cat') . '" class="button">' . __('Vedi altro') . '</a>';
+        if ($for_category) {
+            $output .= '<a href="' . get_term_link($category, 'product_cat') . '" class="button">' . __('Vedi altro') . '</a>';
+        }
 
         $output .= '</div>';
     } else {
         $output = __('No products found');
     }
+
     wp_reset_postdata();
     return $output;
 }
